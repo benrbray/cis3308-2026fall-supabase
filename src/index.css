@@ -1,0 +1,19 @@
+.create-instrument-form {
+  border: 1px solid black;
+  padding: 1em;
+}
+
+.instrument-list {
+}
+
+.instrument-list .instrument {
+  padding: 0.5em;
+  margin: 0.5em;
+  background: rgb(168, 212, 168);
+
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+
+  font-weight: bold;
+}

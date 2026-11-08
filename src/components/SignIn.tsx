@@ -135,7 +135,7 @@ export const LoginForm = (
     </form>
     <div>
       {(emailStatus == "unsent") && <div>Unsent!</div> }
-      {(emailStatus == "sent")   && <div>Email Sent! {JSON.stringify}</div> }
+      {(emailStatus == "sent")   && <div>Email Sent!</div> }
       {(emailStatus == "error")  && <div>Error!</div> }
     </div>
   </div>
