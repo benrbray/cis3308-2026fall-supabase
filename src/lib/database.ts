@@ -6,7 +6,7 @@ import type { Database, Tables, TablesInsert } from '../../types/database.types'
 
 ////////////////////////////////////////////////////////////
 
-// export type Instrument = Tables<"instruments">;
+export type Instrument = Tables<"instruments">;
 
 ////////////////////////////////////////////////////////////
 

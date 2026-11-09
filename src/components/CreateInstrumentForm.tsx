@@ -1,17 +1,22 @@
 import { useState } from "react";
 import { createInstrument } from "../lib/database";
 
-export const CreateInstrumentForm = () => {
+export const CreateInstrumentForm = (
+  props: {
+    onCreate: (instrumentName: string) => void,
+  }
+) => {
   // form data
   const [instrumentName, setInstrumentName] = useState("");
 
-
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-    createInstrument({
+
+    await createInstrument({
       name: instrumentName
-    });
+    })
+
+    props.onCreate(instrumentName);
   }
 
   return <form onSubmit={handleSubmit} className="create-instrument-form">
