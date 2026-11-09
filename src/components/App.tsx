@@ -2,9 +2,11 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { supabase } from '../lib/supabaseClient'
 import type { Database, Tables, Enums } from '../../types/database.types'
-import { AuthStateDisplay } from './SignIn'
+import { AuthStateDisplay } from './auth/AuthStateDisplay'
 import { CreateInstrumentForm } from './CreateInstrumentForm'
 import { deleteInstrument, type Instrument } from '../lib/database'
+import { useAuth } from './auth/authentication'
+import { AuthContext } from './auth/AuthContext'
 
 ////////////////////////////////////////////////////////////
 
@@ -25,6 +27,14 @@ const InstrumentList = (
 }
 
 function App() {
+
+  // ---- authorization ---- //
+
+  const authState = useAuth(supabase);
+
+  const handleLogOut = useCallback(async () => {
+    const { error } = await supabase.auth.signOut()
+  }, []);
 
   // ---- instruments ---- //
 
@@ -60,12 +70,11 @@ function App() {
 
   // --------------------- //
 
-  return (<>
+  return (<AuthContext value={authState}>
+    <AuthStateDisplay onLogOutClicked={handleLogOut}/>
     <InstrumentList instruments={instruments} onDelete={handleDelete} />
     <CreateInstrumentForm onCreate={() => loadInstruments()} />
-
-    {/* <AuthStateDisplay supabaseClient={supabase}/> */}
-  </>)
+  </AuthContext>)
 }
 
 export default App;
